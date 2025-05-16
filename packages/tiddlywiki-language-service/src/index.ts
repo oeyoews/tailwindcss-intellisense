@@ -9,9 +9,128 @@ import { TextDocument } from 'vscode-languageserver-textdocument';
 
 const FIELDS = [
   'title', 'tags', 'created', 'modified', 'type', 'text',
-  'creator', 'modifier', 'list', 'caption', 'icon', 'color', 'description'
+  'creator', 'modifier', 'list', 'caption', 'icon', 'color', 'description',
+  'module-type'
   // ...可继续添加
 ];
+
+const SYSTEM_TYPES = [
+  'text/vnd.tiddlywiki',
+  'text/plain',
+  'text/html',
+  'text/x-markdown',
+  'text/css',
+  'application/javascript',
+  'application/json',
+  'image/svg+xml',
+  'image/png',
+  'image/jpeg',
+  'image/gif',
+  'application/pdf',
+  'application/x-tiddler-dictionary',
+  'application/x-tiddler-dictionary-json',
+  'application/x-tiddler-html',
+  'application/x-tiddler-html-json',
+  'application/x-tiddler-text',
+  'application/x-tiddler-text-json',
+  'application/x-tiddler-wiki',
+  'application/x-tiddler-wiki-json'
+];
+
+const SYSTEM_TAGS = [
+  '$:/tags/TagsSheet'
+];
+
+const MODULE_TYPES = [
+  'library',
+  'subclass',
+  'widget',
+  'macro',
+  'filter',
+  'filteroperator',
+  'filterrunprefix',
+  'filterrunsuffix',
+  'filterrunprefixoperator',
+  'filterrunsuffixoperator',
+  'filterrunprefixoperatorparameter',
+  'filterrunsuffixoperatorparameter',
+  'filterrunprefixoperatorparameterfirst',
+  'filterrunsuffixoperatorparameterfirst',
+  'filterrunprefixoperatorparameterlast',
+  'filterrunsuffixoperatorparameterlast',
+  'filterrunprefixoperatorparameterall',
+  'filterrunsuffixoperatorparameterall',
+  'filterrunprefixoperatorparameternone',
+  'filterrunsuffixoperatorparameternone',
+  'filterrunprefixoperatorparameterone',
+  'filterrunsuffixoperatorparameterone',
+  'filterrunprefixoperatorparametersome',
+  'filterrunsuffixoperatorparametersome',
+  'filterrunprefixoperatorparametermany',
+  'filterrunsuffixoperatorparametermany',
+  'startup',
+  'global',
+  'config',
+  'theme',
+  'palette',
+  'plugin',
+  'pluginlibrary',
+  'pluginlibraryglobal',
+  'pluginlibrarycontrolpanel',
+  'pluginlibraryeditortoolbar',
+  'pluginlibraryviewtoolbar',
+  'pluginlibraryviewtemplate',
+  'pluginlibrarystoryview',
+  'pluginlibrarypagetemplate',
+  'pluginlibrarystylesheet',
+  'pluginlibraryjavascript',
+  'pluginlibrarymacro',
+  'pluginlibrarywidget',
+  'pluginlibraryfilter',
+  'pluginlibraryfilteroperator',
+  'pluginlibraryfilterrunprefix',
+  'pluginlibraryfilterrunsuffix',
+  'pluginlibraryfilterrunprefixoperator',
+  'pluginlibraryfilterrunsuffixoperator',
+  'pluginlibraryfilterrunprefixoperatorparameter',
+  'pluginlibraryfilterrunsuffixoperatorparameter',
+  'pluginlibraryfilterrunprefixoperatorparameterfirst',
+  'pluginlibraryfilterrunsuffixoperatorparameterfirst',
+  'pluginlibraryfilterrunprefixoperatorparameterlast',
+  'pluginlibraryfilterrunsuffixoperatorparameterlast',
+  'pluginlibraryfilterrunprefixoperatorparameterall',
+  'pluginlibraryfilterrunsuffixoperatorparameterall',
+  'pluginlibraryfilterrunprefixoperatorparameternone',
+  'pluginlibraryfilterrunsuffixoperatorparameternone',
+  'pluginlibraryfilterrunprefixoperatorparameterone',
+  'pluginlibraryfilterrunsuffixoperatorparameterone',
+  'pluginlibraryfilterrunprefixoperatorparametersome',
+  'pluginlibraryfilterrunsuffixoperatorparametersome',
+  'pluginlibraryfilterrunprefixoperatorparametermany',
+  'pluginlibraryfilterrunsuffixoperatorparametermany'
+];
+
+const MODULE_TYPE_DESCRIPTIONS: Record<string, string> = {
+  'library': 'JavaScript 库模块，提供可重用的函数和类',
+  'subclass': 'JavaScript 子类模块，用于扩展现有类',
+  'widget': '自定义部件模块，用于创建新的 TiddlyWiki 部件',
+  'macro': '宏模块，用于创建新的 TiddlyWiki 宏',
+  'filter': '过滤器模块，用于创建新的 TiddlyWiki 过滤器',
+  'filteroperator': '过滤器操作符模块，用于创建新的过滤器操作符',
+  'filterrunprefix': '过滤器运行前缀模块，用于创建新的过滤器运行前缀',
+  'filterrunsuffix': '过滤器运行后缀模块，用于创建新的过滤器运行后缀',
+  'filterrunprefixoperator': '过滤器运行前缀操作符模块',
+  'filterrunsuffixoperator': '过滤器运行后缀操作符模块',
+  'filterrunprefixoperatorparameter': '过滤器运行前缀操作符参数模块',
+  'filterrunsuffixoperatorparameter': '过滤器运行后缀操作符参数模块',
+  'startup': '启动模块，在 TiddlyWiki 启动时执行',
+  'global': '全局模块，提供全局变量和函数',
+  'config': '配置模块，用于存储配置信息',
+  'theme': '主题模块，用于定义 TiddlyWiki 主题',
+  'palette': '调色板模块，用于定义颜色方案',
+  'plugin': '插件模块，用于扩展 TiddlyWiki 功能',
+  'pluginlibrary': '插件库模块，用于组织和管理插件'
+};
 
 const FIELD_DESCRIPTIONS: Record<string, string> = {
   title: '条目的标题，必填字段',
@@ -26,7 +145,56 @@ const FIELD_DESCRIPTIONS: Record<string, string> = {
   caption: '条目的显示标题',
   icon: '条目的图标',
   color: '条目的颜色',
-  description: '条目的描述信息'
+  description: '条目的描述信息',
+  'module-type': '模块类型，用于指定 JavaScript 模块的类型'
+};
+
+const TYPE_DESCRIPTIONS: Record<string, string> = {
+  'text/vnd.tiddlywiki': 'TiddlyWiki 原生格式，支持所有 TiddlyWiki 语法',
+  'text/plain': '纯文本格式',
+  'text/html': 'HTML 格式',
+  'text/x-markdown': 'Markdown 格式',
+  'text/css': 'CSS 样式表',
+  'application/javascript': 'JavaScript 代码',
+  'application/json': 'JSON 数据',
+  'image/svg+xml': 'SVG 矢量图形',
+  'image/png': 'PNG 图片',
+  'image/jpeg': 'JPEG 图片',
+  'image/gif': 'GIF 图片',
+  'application/pdf': 'PDF 文档',
+  'application/x-tiddler-dictionary': 'Tiddler 字典格式',
+  'application/x-tiddler-dictionary-json': 'Tiddler 字典 JSON 格式',
+  'application/x-tiddler-html': 'Tiddler HTML 格式',
+  'application/x-tiddler-html-json': 'Tiddler HTML JSON 格式',
+  'application/x-tiddler-text': 'Tiddler 文本格式',
+  'application/x-tiddler-text-json': 'Tiddler 文本 JSON 格式',
+  'application/x-tiddler-wiki': 'Tiddler Wiki 格式',
+  'application/x-tiddler-wiki-json': 'Tiddler Wiki JSON 格式'
+};
+
+const TAG_DESCRIPTIONS: Record<string, string> = {
+  '$:/tags/System': '系统标签，用于标记系统条目',
+  '$:/tags/SystemInfo': '系统信息标签，用于标记系统信息条目',
+  '$:/tags/SystemConfig': '系统配置标签，用于标记系统配置条目',
+  '$:/tags/SystemTheme': '系统主题标签，用于标记系统主题条目',
+  '$:/tags/SystemPalette': '系统调色板标签，用于标记系统调色板条目',
+  '$:/tags/SystemPlugin': '系统插件标签，用于标记系统插件条目',
+  '$:/tags/SystemPluginLibrary': '系统插件库标签，用于标记系统插件库条目',
+  '$:/tags/SystemPluginLibrary/Global': '全局插件库标签',
+  '$:/tags/SystemPluginLibrary/ControlPanel': '控制面板插件库标签',
+  '$:/tags/SystemPluginLibrary/EditorToolbar': '编辑器工具栏插件库标签',
+  '$:/tags/SystemPluginLibrary/ViewToolbar': '视图工具栏插件库标签',
+  '$:/tags/SystemPluginLibrary/ViewTemplate': '视图模板插件库标签',
+  '$:/tags/SystemPluginLibrary/StoryView': '故事视图插件库标签',
+  '$:/tags/SystemPluginLibrary/PageTemplate': '页面模板插件库标签',
+  '$:/tags/SystemPluginLibrary/Stylesheet': '样式表插件库标签',
+  '$:/tags/SystemPluginLibrary/JavaScript': 'JavaScript插件库标签',
+  '$:/tags/SystemPluginLibrary/Macro': '宏插件库标签',
+  '$:/tags/SystemPluginLibrary/Widget': '部件插件库标签',
+  '$:/tags/SystemPluginLibrary/Filter': '过滤器插件库标签',
+  '$:/tags/SystemPluginLibrary/FilterOperator': '过滤器操作符插件库标签',
+  '$:/tags/SystemPluginLibrary/FilterRunPrefix': '过滤器运行前缀插件库标签',
+  '$:/tags/SystemPluginLibrary/FilterRunSuffix': '过滤器运行后缀插件库标签'
 };
 
 const WIKITEXT_SYNTAX = {
@@ -85,6 +253,62 @@ export function getCompletions(document: TextDocument, position: { line: number;
       }));
   }
 
+  // 模块类型补全
+  const moduleTypeMatch = lineText.match(/^module-type:\s*([^$]*)$/);
+  if (moduleTypeMatch) {
+    const prefix = moduleTypeMatch[1].trim();
+    return MODULE_TYPES
+      .filter(type => type.toLowerCase().includes(prefix.toLowerCase()))
+      .map(type => ({
+        label: type,
+        kind: CompletionItemKind.Constant,
+        insertText: type,
+        detail: MODULE_TYPE_DESCRIPTIONS[type] || '模块类型',
+        documentation: {
+          kind: 'markdown',
+          value: `**${type}**\n\n${MODULE_TYPE_DESCRIPTIONS[type] || '模块类型'}`
+        }
+      }));
+  }
+
+  // 类型补全
+  const typeMatch = lineText.match(/^type:\s*([^$]*)$/);
+  if (typeMatch) {
+    const prefix = typeMatch[1].trim();
+    return SYSTEM_TYPES
+      .filter(type => type.toLowerCase().includes(prefix.toLowerCase()))
+      .map(type => ({
+        label: type,
+        kind: CompletionItemKind.Constant,
+        insertText: type,
+        detail: TYPE_DESCRIPTIONS[type] || '系统类型',
+        documentation: {
+          kind: 'markdown',
+          value: `**${type}**\n\n${TYPE_DESCRIPTIONS[type] || '系统类型'}`
+        }
+      }));
+  }
+
+  // 标签补全
+  const tagsMatch = lineText.match(/^tags:\s*([^$]*)$/);
+  if (tagsMatch) {
+    const prefix = tagsMatch[1].trim();
+    const existingTags = new Set(text.match(/^tags:\s*(.*)$/m)?.[1].split(/\s+/) || []);
+
+    return SYSTEM_TAGS
+      .filter(tag => !existingTags.has(tag) && tag.toLowerCase().includes(prefix.toLowerCase()))
+      .map(tag => ({
+        label: tag,
+        kind: CompletionItemKind.Constant,
+        insertText: tag,
+        detail: TAG_DESCRIPTIONS[tag] || '系统标签',
+        documentation: {
+          kind: 'markdown',
+          value: `**${tag}**\n\n${TAG_DESCRIPTIONS[tag] || '系统标签'}`
+        }
+      }));
+  }
+
   // Wikitext 补全
   const macroMatch = lineText.match(/<<(\w*)$/);
   if (macroMatch) {
@@ -121,16 +345,95 @@ export function getHover(document: TextDocument, position: { line: number; chara
   });
 
   // 字段悬浮提示
-  const fieldMatch = line.match(/(\w+):$/);
+  const fieldMatch = line.match(/(\w+):/);
   if (fieldMatch) {
     const field = fieldMatch[1];
     if (FIELDS.includes(field)) {
       return {
         contents: {
           kind: 'markdown',
-          value: `**${field}**\n\n${FIELD_DESCRIPTIONS[field] || 'TiddlyWiki 字段'}`
+          value: `**${field}**\n\n${FIELD_DESCRIPTIONS[field] || 'TiddlyWiki 字段'}\n\n示例：\`${field}: 值\``
+        },
+        range: {
+          start: { line: position.line, character: fieldMatch.index || 0 },
+          end: { line: position.line, character: (fieldMatch.index || 0) + field.length }
         }
       };
+    }
+  }
+
+  // 模块类型悬浮提示
+  const moduleTypeLine = document.getText({
+    start: { line: position.line, character: 0 },
+    end: { line: position.line, character: position.character }
+  });
+
+  if (moduleTypeLine.startsWith('module-type:')) {
+    const typeMatch = moduleTypeLine.match(/[a-z]+/);
+    if (typeMatch) {
+      const type = typeMatch[0];
+      if (MODULE_TYPES.includes(type)) {
+        return {
+          contents: {
+            kind: 'markdown',
+            value: `**${type}**\n\n${MODULE_TYPE_DESCRIPTIONS[type] || '模块类型'}`
+          },
+          range: {
+            start: { line: position.line, character: typeMatch.index || 0 },
+            end: { line: position.line, character: (typeMatch.index || 0) + type.length }
+          }
+        };
+      }
+    }
+  }
+
+  // 类型悬浮提示
+  const typeLine = document.getText({
+    start: { line: position.line, character: 0 },
+    end: { line: position.line, character: position.character }
+  });
+
+  if (typeLine.startsWith('type:')) {
+    const typeMatch = typeLine.match(/[a-z]+\/[a-z0-9+-.]+/);
+    if (typeMatch) {
+      const type = typeMatch[0];
+      if (SYSTEM_TYPES.includes(type)) {
+        return {
+          contents: {
+            kind: 'markdown',
+            value: `**${type}**\n\n${TYPE_DESCRIPTIONS[type] || '系统类型'}`
+          },
+          range: {
+            start: { line: position.line, character: typeMatch.index || 0 },
+            end: { line: position.line, character: (typeMatch.index || 0) + type.length }
+          }
+        };
+      }
+    }
+  }
+
+  // 标签悬浮提示
+  const tagsLine = document.getText({
+    start: { line: position.line, character: 0 },
+    end: { line: position.line, character: position.character }
+  });
+
+  if (tagsLine.startsWith('tags:')) {
+    const tagMatch = tagsLine.match(/\$:\/tags\/[^\s]+/);
+    if (tagMatch) {
+      const tag = tagMatch[0];
+      if (SYSTEM_TAGS.includes(tag)) {
+        return {
+          contents: {
+            kind: 'markdown',
+            value: `**${tag}**\n\n${TAG_DESCRIPTIONS[tag] || '系统标签'}`
+          },
+          range: {
+            start: { line: position.line, character: tagMatch.index || 0 },
+            end: { line: position.line, character: (tagMatch.index || 0) + tag.length }
+          }
+        };
+      }
     }
   }
 
@@ -144,6 +447,10 @@ export function getHover(document: TextDocument, position: { line: number; chara
         contents: {
           kind: 'markdown',
           value: `**${macro}**\n\n${macroInfo.description}`
+        },
+        range: {
+          start: { line: position.line, character: macroMatch.index || 0 },
+          end: { line: position.line, character: (macroMatch.index || 0) + macro.length + 2 }
         }
       };
     }

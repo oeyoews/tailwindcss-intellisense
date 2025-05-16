@@ -7,6 +7,10 @@
   "engines": {
     "vscode": ">=1.80.0"
   },
+  "scripts": {
+    "build": "tsc",
+    "package": "vsce package"
+  },
   "categories": [
     "Programming Languages"
   ],
@@ -20,8 +24,13 @@
         "id": "tiddlywiki",
         "aliases": [
           "TiddlyWiki",
+          "TiddlyWiki5",
           "tiddlywiki"
         ],
+        "icon": {
+          "light": "media/icon.png",
+          "dark": "media/icon.png"
+        },
         "extensions": [
           ".tid",
           ".meta",
@@ -36,10 +45,6 @@
         "path": "./syntaxes/tiddlywiki.tmLanguage.json"
       }
     ]
-  },
-  "scripts": {
-    "build": "tsc",
-    "package": "vsce package"
   },
   "devDependencies": {
     "typescript": "^5.0.0",
