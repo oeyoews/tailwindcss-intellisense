@@ -1,14 +1,18 @@
 {
   "name": "tiddlywiki-language",
   "private": true,
+  "scripts": {
+    "preinstalls": "npx -y only-allow pnpm",
+    "build:service": "pnpm -F tiddlywiki-language-service build",
+    "build:server": "pnpm -F tiddlywiki-language-server build",
+    "build:ext": "pnpm -F vscode-tiddlywiki build",
+    "package": "pnpm -F vscode-tiddlywiki package",
+    "build": "pnpm build:service && pnpm build:server && pnpm build:ext"
+  },
   "devDependencies": {
-    "@npmcli/package-json": "^5.0.0",
-    "@types/culori": "^2.1.0",
-    "culori": "^4.0.1",
     "esbuild": "^0.25.0",
     "minimist": "^1.2.8",
     "prettier": "^3.2.5",
-    "semver": "^7.7.1",
     "vscode-languageclient": "8.1.0",
     "vscode-languageserver": "8.1.0",
     "vscode-languageserver-protocol": "^3.17.5",
@@ -18,9 +22,6 @@
     "semi": false,
     "singleQuote": true,
     "printWidth": 100
-  },
-  "scripts": {
-    "preinstalls": "npx -y only-allow pnpm"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

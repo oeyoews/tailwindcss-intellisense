@@ -11,7 +11,6 @@ import {
 } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { getCompletions, getHover, getDiagnostics } from 'tiddlywiki-language-service';
-
 const connection = createConnection(ProposedFeatures.all);
 const documents = new TextDocuments(TextDocument);
 

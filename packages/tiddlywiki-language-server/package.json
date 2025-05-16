@@ -1,11 +1,12 @@
 {
   "name": "tiddlywiki-language-server",
   "version": "0.0.1",
-  "description": "TiddlyWiki LSP 服务器，为编辑器提供智能感知、补全、诊断等功能。",
+  "description": "TiddlyWiki LSP 服务器，为编辑器（如 VSCode）提供智能感知、补全、诊断等功能。",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
+    "watch": "tsc -w",
     "dev": "ts-node src/index.ts"
   },
   "license": "MIT",

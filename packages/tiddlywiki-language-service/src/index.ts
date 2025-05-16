@@ -213,7 +213,7 @@ const WIKITEXT_SYNTAX = {
     external: { pattern: '\\[.*?\\]\\(.*?\\)', description: '外部链接，例如：`[Link text](url)`' }
   },
   formatting: {
-    bold: { pattern: "''.*?''", description: '粗体文本，例如：`''bold text''`' },
+    // bold: { pattern: "''.*?''", description: '粗体文本，例如：`''bold text''`' },
     italic: { pattern: '//.*?//', description: '斜体文本，例如：`//italic text//`' },
     underline: { pattern: '__.*?__', description: '下划线文本，例如：`__underlined text__`' },
     strikethrough: { pattern: '~~.*?~~', description: '删除线文本，例如：`~~strikethrough text~~`' }
