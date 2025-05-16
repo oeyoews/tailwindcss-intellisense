@@ -1,5 +1,2 @@
 packages:
   - 'packages/*'
-  - 'packages/tiddlywiki-language-server'
-  - 'packages/tiddlywiki-language-service'
-  - 'packages/vscode-tiddlywiki'

@@ -3,7 +3,7 @@
   "patterns": [
     {
       "name": "entity.name.tag.tiddlywiki",
-      "match": "^(title|tags|created|modified|type|text):"
+      "match": "^(title|tags|created|modified|type|text|icon|color|description):"
     },
     {
       "name": "markup.underline.link.tiddlywiki",

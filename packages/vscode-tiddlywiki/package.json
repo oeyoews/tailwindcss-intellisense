@@ -7,15 +7,26 @@
   "engines": {
     "vscode": ">=1.80.0"
   },
-  "categories": ["Programming Languages"],
-  "activationEvents": ["onLanguage:tiddlywiki"],
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:tiddlywiki"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "languages": [
       {
         "id": "tiddlywiki",
-        "aliases": ["TiddlyWiki", "tiddlywiki"],
-        "extensions": [".tid", ".meta", ".tw5"]
+        "aliases": [
+          "TiddlyWiki",
+          "tiddlywiki"
+        ],
+        "extensions": [
+          ".tid",
+          ".meta",
+          ".tw5"
+        ]
       }
     ],
     "grammars": [
@@ -32,7 +43,10 @@
   },
   "devDependencies": {
     "typescript": "^5.0.0",
-    "vsce": "^2.15.0"
+    "@types/vscode": "^1.100.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "vsce": "^2.15.0"
+  }
 }

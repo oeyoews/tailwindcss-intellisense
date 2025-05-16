@@ -5,13 +5,11 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "test": "vitest"
+    "build": "tsc"
   },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "vitest": "^0.34.0"
+    "typescript": "^5.0.0"
   }
 }

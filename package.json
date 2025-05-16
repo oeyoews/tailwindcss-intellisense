@@ -19,10 +19,13 @@
     "singleQuote": true,
     "printWidth": 100
   },
-  "packageManager": "pnpm@9.6.0",
-  "workspaces": [
-    "packages/tiddlywiki-language-server",
-    "packages/tiddlywiki-language-service",
-    "packages/vscode-tiddlywiki"
-  ]
+  "scripts": {
+    "preinstalls": "npx -y only-allow pnpm"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "keytar"
+    ]
+  }
 }

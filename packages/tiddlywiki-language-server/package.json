@@ -5,15 +5,14 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc --noEmit",
-    "dev": "ts-node src/index.ts",
-    "test": "vitest"
+    "build": "tsc",
+    "dev": "ts-node src/index.ts"
   },
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "typescript": "^5.0.0",
     "ts-node": "^10.0.0",
-    "vitest": "^0.34.0"
+    "tiddlywiki-language-service": "workspace:*"
   }
 }

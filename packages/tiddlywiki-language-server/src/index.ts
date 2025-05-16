@@ -6,7 +6,8 @@ import {
   CompletionItemKind,
   InitializeParams,
   TextDocumentPositionParams,
-  Hover
+  Hover,
+  TextDocumentSyncKind
 } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
 import { getCompletions, getHover, getDiagnostics } from 'tiddlywiki-language-service';
@@ -16,7 +17,7 @@ const documents = new TextDocuments(TextDocument);
 
 connection.onInitialize((_params: InitializeParams) => ({
   capabilities: {
-    textDocumentSync: documents.syncKind,
+    textDocumentSync: TextDocumentSyncKind.Full,
     completionProvider: {},
     hoverProvider: true
   }
