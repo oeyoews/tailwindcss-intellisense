@@ -1,4 +1,19 @@
 {
+  "private": true,
+  "keywords": [
+    "TiddlyWiki",
+    "Usewiki2"
+  ],
+  "author": {
+    "name": "oeyoews"
+  },
+  "pricing": "Free",
+  "funding": "https://github.com/sponsors/oeyoews",
+  "homepage": "https://github.com/oeyoews/vscode-intellisense#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oeyoews/vscode-intellisense#readme"
+  },
   "name": "vscode-tiddlywiki",
   "displayName": "TiddlyWiki Intellisense",
   "description": "为 TiddlyWiki 提供智能感知、补全、诊断等功能的 VSCode 扩展。",
@@ -16,7 +31,7 @@
     "Programming Languages"
   ],
   "activationEvents": [
-    "onLanguage:tiddlywiki"
+    "onStartupFinished"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -36,7 +51,8 @@
           ".tid",
           ".meta",
           ".tw5"
-        ]
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -45,14 +61,22 @@
         "scopeName": "source.tiddlywiki",
         "path": "./syntaxes/tiddlywiki.tmLanguage.json"
       }
-    ]
+    ],
+    "files.associations": {
+      "*.tid": "Tiddlywiki",
+      "*.meta": "tiddlywiki",
+      "*.tw5": "tiddlywiki"
+    }
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "@types/vscode": "^1.80.0"
+    "@types/vscode": "1.80.0",
+    "typescript": "^5.8.3"
   },
+    "files": [
+      "dist"
+  ],
   "license": "MIT",
   "dependencies": {
-    "vsce": "^2.15.0"
+    "@vscode/vsce": "3.2.0"
   }
 }

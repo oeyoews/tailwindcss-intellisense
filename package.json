@@ -10,23 +10,9 @@
     "build": "pnpm build:service && pnpm build:server && pnpm build:ext"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0",
-    "minimist": "^1.2.8",
-    "prettier": "^3.2.5",
     "vscode-languageclient": "8.1.0",
     "vscode-languageserver": "8.1.0",
     "vscode-languageserver-protocol": "^3.17.5",
     "vscode-languageserver-textdocument": "1.0.12"
-  },
-  "prettier": {
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 100
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "keytar"
-    ]
   }
 }
