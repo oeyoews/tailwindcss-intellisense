@@ -1,0 +1,17 @@
+{
+  "name": "tiddlywiki-language-service",
+  "version": "0.0.1",
+  "description": "TiddlyWiki 语言服务，提供补全、诊断等核心能力。",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vitest": "^0.34.0"
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "tailwindcss-intellisense",
+  "name": "tiddlywiki-language",
   "private": true,
   "devDependencies": {
     "@npmcli/package-json": "^5.0.0",
@@ -8,12 +8,21 @@
     "esbuild": "^0.25.0",
     "minimist": "^1.2.8",
     "prettier": "^3.2.5",
-    "semver": "^7.7.1"
+    "semver": "^7.7.1",
+    "vscode-languageclient": "8.1.0",
+    "vscode-languageserver": "8.1.0",
+    "vscode-languageserver-protocol": "^3.17.5",
+    "vscode-languageserver-textdocument": "1.0.12"
   },
   "prettier": {
     "semi": false,
     "singleQuote": true,
     "printWidth": 100
   },
-  "packageManager": "pnpm@9.6.0"
+  "packageManager": "pnpm@9.6.0",
+  "workspaces": [
+    "packages/tiddlywiki-language-server",
+    "packages/tiddlywiki-language-service",
+    "packages/vscode-tiddlywiki"
+  ]
 }

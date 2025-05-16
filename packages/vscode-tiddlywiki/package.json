@@ -1,0 +1,38 @@
+{
+  "name": "vscode-tiddlywiki",
+  "displayName": "TiddlyWiki Intellisense",
+  "description": "为 TiddlyWiki 提供智能感知、补全、诊断等功能的 VSCode 扩展。",
+  "version": "0.0.1",
+  "publisher": "oeyoews",
+  "engines": {
+    "vscode": ">=1.80.0"
+  },
+  "categories": ["Programming Languages"],
+  "activationEvents": ["onLanguage:tiddlywiki"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "tiddlywiki",
+        "aliases": ["TiddlyWiki", "tiddlywiki"],
+        "extensions": [".tid", ".meta", ".tw5"]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "tiddlywiki",
+        "scopeName": "source.tiddlywiki",
+        "path": "./syntaxes/tiddlywiki.tmLanguage.json"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "vsce": "^2.15.0"
+  },
+  "license": "MIT"
+}

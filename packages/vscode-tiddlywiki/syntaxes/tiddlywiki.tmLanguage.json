@@ -1,0 +1,16 @@
+{
+  "scopeName": "source.tiddlywiki",
+  "patterns": [
+    {
+      "name": "entity.name.tag.tiddlywiki",
+      "match": "^(title|tags|created|modified|type|text):"
+    },
+    {
+      "name": "markup.underline.link.tiddlywiki",
+      "match": "\\[\\[.*?\\]\\]"
+    }
+  ],
+  "repository": {},
+  "fileTypes": ["tid", "meta", "tw5"],
+  "name": "TiddlyWiki"
+}
