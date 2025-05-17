@@ -8,7 +8,7 @@
       "runtimeExecutable": "${execPath}",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-tiddlywiki",
-        //  "--disable-extensions"
+        "--disable-extensions"
       ],
       "outFiles": [
         "${workspaceFolder}/packages/vscode-tiddlywiki/dist/**/*.js"
