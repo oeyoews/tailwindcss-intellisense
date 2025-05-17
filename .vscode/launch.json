@@ -10,7 +10,7 @@
         "--extensionDevelopmentPath=${workspaceFolder}/packages/vscode-tiddlywiki"
       ],
       "outFiles": [
-        "${workspaceFolder}/packages/vscode-tiddlywiki/out/**/*.js"
+        "${workspaceFolder}/packages/vscode-tiddlywiki/dist/**/*.js"
       ]
     }
   ]

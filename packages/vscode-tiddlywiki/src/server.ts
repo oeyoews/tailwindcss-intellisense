@@ -1,0 +1,1 @@
+import 'tiddlywiki-language-server/src/index'
