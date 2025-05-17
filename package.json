@@ -5,6 +5,7 @@
     "preinstalls": "npx -y only-allow pnpm",
     "build:service": "pnpm -F tiddlywiki-language-service build",
     "build:server": "pnpm -F tiddlywiki-language-server build",
+    "dev": "pnpm -F vscode-tiddlywiki watch",
     "build": "pnpm -F vscode-tiddlywiki build",
     "package": "pnpm -F vscode-tiddlywiki package"
   },
