@@ -5,9 +5,8 @@
     "preinstalls": "npx -y only-allow pnpm",
     "build:service": "pnpm -F tiddlywiki-language-service build",
     "build:server": "pnpm -F tiddlywiki-language-server build",
-    "build:ext": "pnpm -F vscode-tiddlywiki build",
-    "package": "pnpm -F vscode-tiddlywiki package",
-    "build": "pnpm build:service && pnpm build:server && pnpm build:ext"
+    "build": "pnpm -F vscode-tiddlywiki build",
+    "package": "pnpm -F vscode-tiddlywiki package"
   },
   "devDependencies": {
     "vscode-languageclient": "8.1.0",
