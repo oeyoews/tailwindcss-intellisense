@@ -5,9 +5,6 @@ import { LanguageClient, LanguageClientOptions, ServerOptions, TransportKind } f
 let client: LanguageClient;
 
 export function activate(context: vscode.ExtensionContext) {
-  // const serverModule = context.asAbsolutePath(
-  //   path.join('..', 'tiddlywiki-language-server', 'dist', 'index.js')
-  // );
   const serverModule = context.asAbsolutePath(path.join('dist', 'server.js'))
   const serverOptions: ServerOptions = {
     run: { module: serverModule, transport: TransportKind.ipc },

@@ -6,7 +6,8 @@
     "build:service": "pnpm -F tiddlywiki-language-service build",
     "build:server": "pnpm -F tiddlywiki-language-server build",
     "dev": "pnpm -F vscode-tiddlywiki watch",
-    "build": "pnpm -F vscode-tiddlywiki build",
+    "build:ext": "pnpm -F vscode-tiddlywiki build",
+    "build": "pnpm build:service && pnpm build:server && pnpm build:ext",
     "package": "pnpm -F vscode-tiddlywiki package"
   },
   "devDependencies": {
