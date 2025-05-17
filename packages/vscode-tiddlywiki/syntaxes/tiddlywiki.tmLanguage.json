@@ -206,5 +206,10 @@
   ],
   "repository": {},
   "fileTypes": ["tid", "meta", "tw5"],
-  "name": "TiddlyWiki"
+  "name": "tiddlytiki",
+  "files.associations": {
+    "*.tid": "tiddlywiki",
+    "*.meta": "tiddlywiki",
+    "*.tw5": "tiddlywiki"
+  }
 }

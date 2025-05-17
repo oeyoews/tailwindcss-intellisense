@@ -1,8 +1,7 @@
 {
   "private": true,
   "keywords": [
-    "TiddlyWiki",
-    "Usewiki2"
+    "TiddlyWiki"
   ],
   "author": {
     "name": "oeyoews"
@@ -30,9 +29,6 @@
   "categories": [
     "Programming Languages"
   ],
-  "activationEvents": [
-    "onStartupFinished"
-  ],
   "icon": "media/logo.png",
   "main": "dist/extension.js",
   "contributes": {
@@ -41,7 +37,6 @@
         "id": "tiddlywiki",
         "aliases": [
           "TiddlyWiki",
-          "TiddlyWiki5",
           "tiddlywiki"
         ],
         "icon": {
@@ -50,10 +45,20 @@
         },
         "extensions": [
           ".tid",
-          ".meta",
-          ".tw5"
+          ".meta"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "json",
+        "extensions": [
+          ".info",
+          ".files"
+        ],
+        "aliases": [
+          "Tiddlywiki5 Json",
+          "tiddlywiki5-json"
+        ]
       }
     ],
     "grammars": [
@@ -62,12 +67,7 @@
         "scopeName": "source.tiddlywiki",
         "path": "./syntaxes/tiddlywiki.tmLanguage.json"
       }
-    ],
-    "files.associations": {
-      "*.tid": "Tiddlywiki",
-      "*.meta": "tiddlywiki",
-      "*.tw5": "tiddlywiki"
-    }
+    ]
   },
   "devDependencies": {
     "@types/vscode": "1.80.0",
@@ -75,6 +75,12 @@
     "esbuild": "^0.25.4",
     "tiddlywiki-language-server": "workspace:*",
     "typescript": "^5.8.3"
+  },
+  "configurationDefaults": {
+    "files.associations": {
+      "*.tid": "tiddlywiki",
+      "*.meta": "tiddlywiki"
+    }
   },
   "files": [
     "dist",
